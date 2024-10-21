@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'todolistManagerApp' #added app here
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'todolistManagerProject.urls'
+
+LOGIN_REDIRECT_URL = '/'  # Redirect to the home page (task list) after login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect to login page after logout
+
 
 TEMPLATES = [
     {
