@@ -23,8 +23,12 @@ class Task(models.Model):
             ('completed', 'Completed'),
         ]
     )
-    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
-    assigned_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    priority = models.CharField(
+        max_length=10,
+        choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')],
+        default='medium'
+    )
+    assigned_users = models.ManyToManyField(User)  # Allow multiple users
 
     def __str__(self):
         return self.name
