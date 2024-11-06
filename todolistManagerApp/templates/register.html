@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Create an Account</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Render all form fields, including email, user type, and admin code -->
+        <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+
+    <!-- Display any form errors -->
+    {% if form.errors %}
+        <div class="alert alert-danger mt-3">
+            <ul>
+                {% for field in form %}
+                    {% if field.errors %}
+                        <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+<!-- JavaScript to show/hide the admin_code field based on user type selection -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userTypeField = document.getElementById('id_user_type');
+        const adminCodeField = document.getElementById('id_admin_code').closest('p'); // Adjust if your layout is different
+
+        function toggleAdminCodeField() {
+            if (userTypeField.value === 'admin') {
+                adminCodeField.style.display = 'block';
+            } else {
+                adminCodeField.style.display = 'none';
+            }
+        }
+
+        // Initial call to set the correct visibility on page load
+        toggleAdminCodeField();
+
+        // Add event listener to toggle visibility when the user type changes
+        userTypeField.addEventListener('change', toggleAdminCodeField);
+    });
+</script>
+{% endblock %}
+

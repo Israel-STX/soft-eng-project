@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+    <h2>Update Task Status</h2>
+    <form method="post">
+        {% csrf_token %}
+        <select name="status">
+            <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>Pending</option>
+            <option value="in progress" {% if task.status == 'in progress' %}selected{% endif %}>In Progress</option>
+            <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Completed</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Update Status</button>
+    </form>
+{% else %}
+    <p>You must be logged in to update the task status.</p>
+{% endif %}
+{% endblock %}
