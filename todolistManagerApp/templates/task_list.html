@@ -39,7 +39,12 @@
                         table-danger  <!-- Red for overdue -->
                     {% elif task.due_date|date:'U' <= today|add:259200 %}
                         table-warning  <!-- Orange for due within 3 days -->
-                    {% endif %}
+                        {% endif %}
+
+                {% endif %}
+
+                {% if task.status == 'completed' %}
+                    table-success <!-- Green for Completed -->
                 {% endif %}
             ">
                 <td>{{ task.name }}</td>
@@ -67,8 +72,7 @@
     </table>
 
     <!-- Disable the submit button for non-admin users with no tasks -->
-    <button type="submit" class="btn btn-primary" 
-        {% if not is_admin  %}disabled{% endif %}>
+    <button type="submit" class="btn btn-primary">
         Update Statuses
     </button>
 </form>

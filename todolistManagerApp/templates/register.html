@@ -10,20 +10,17 @@
         {% csrf_token %}
         {{ form.as_p }}  <!-- Render all form fields, including email, user type, and admin code -->
         <button type="submit" class="btn btn-primary">Create Account</button>
+        <br>
+        <br> 
+        <br>
+        <br>
+
     </form>
 
     <!-- Display any form errors -->
-    {% if form.errors %}
-        <div class="alert alert-danger mt-3">
-            <ul>
-                {% for field in form %}
-                    {% if field.errors %}
-                        <li>{{ field.label }}: {{ field.errors|striptags }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+     
+    <!-- Moved to Base.html to look cleaner -->
+
 </div>
 
 <!-- JavaScript to show/hide the admin_code field based on user type selection -->
@@ -48,4 +45,5 @@
     });
 </script>
 {% endblock %}
+
 
